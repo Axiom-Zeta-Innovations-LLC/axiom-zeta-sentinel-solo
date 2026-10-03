@@ -1,4 +1,4 @@
-# Axiom Drift Solo
+# Axiom Zeta Sentinel Solo
 
 > **Sept 2026 revision:** the engine now builds, is deterministic, and compares each window against a learned reference baseline; authentication fails closed. See [CHANGES.md](CHANGES.md) for details and open items.
 
@@ -9,7 +9,7 @@ An API gateway middleware that helps reduce LLM/data drift using a full HRM mani
 ### 1) Core value proposition
 
 - Input: model outputs, embeddings, metadata, and metric streams.
-- Engine: 24-D mesh axiom-drift with topology-aware stabilization in Rust.
+- Engine: 24-D mesh axiom-zeta-sentinel with topology-aware stabilization in Rust.
 - Output: bounded corrected signal + drift score + risk/action policy.
 - Outcome: fewer hallucination cascades, lower retraining frequency, and lower infra spend.
 
@@ -31,7 +31,7 @@ Stabilize response includes:
 
 ### 3) Architecture
 
-- Rust crate (`axiom_drift_core`): deterministic HRM manifold runtime (mesh, Laplacian stress evolution, topology surgery), bounded output, high-throughput hot path.
+- Rust crate (`axiom_zeta_sentinel_core`): deterministic HRM manifold runtime (mesh, Laplacian stress evolution, topology surgery), bounded output, high-throughput hot path.
 - Python FastAPI gateway: auth, policy, tenant isolation, observability, integration points.
 - PyO3/maturin bridge: Python invokes Rust core with near-C performance.
 - Optional stream integration points: Redis/Kafka adapters can be added in gateway layer.
@@ -54,7 +54,7 @@ gateway/
   integrations/stream.py
 sdk/
   pyproject.toml
-  axiom_drift_sdk/{__init__.py,client.py,types.py}
+  axiom_zeta_sentinel_sdk/{__init__.py,client.py,types.py}
 examples/
   langchain_llamaindex_integration.py
 notebooks/
@@ -63,7 +63,7 @@ rust/
   Cargo.toml
   pyproject.toml
   src/{lib.rs,engine.rs}
-helm/axiom-drift-solo/
+helm/axiom-zeta-sentinel-solo/
   Chart.yaml
   values.yaml
   templates/{deployment.yaml,service.yaml}
@@ -93,7 +93,7 @@ python -m pip install -e .
 ```bash
 uvicorn gateway.main:app --reload --port 8000
 # or
-axiom-drift-solo
+axiom-zeta-sentinel-solo
 ```
 
 Auth (required; the gateway refuses requests without it unless ALLOW_INSECURE_NO_AUTH=true):
@@ -182,9 +182,9 @@ python -m pip install -e ./sdk
 Use in code:
 
 ```python
-from axiom_drift_sdk import AxiomDriftClient
+from axiom_zeta_sentinel_sdk import AxiomZetaSentinelClient
 
-client = AxiomDriftClient(base_url="http://127.0.0.1:8000", api_key="replace-me")
+client = AxiomZetaSentinelClient(base_url="http://127.0.0.1:8000", api_key="replace-me")
 out = client.stabilize(
   tenant_id="acme",
   request_id="sdk-001",
@@ -229,7 +229,7 @@ jupyter notebook notebooks/rag_benchmark_before_after.ipynb
 
 - Refactored engine boundary: no plotting/runtime script globals in gateway runtime.
 - Stable I/O schema: strict bounded Pydantic models.
-- Rust hot path: stabilization dynamics and diagnostics in `axiom_drift_core`.
+- Rust hot path: stabilization dynamics and diagnostics in `axiom_zeta_sentinel_core`.
 - Gateway policy layer: risk thresholds + fallback hooks + circuit-breaker escalation.
 - Telemetry and SLOs: p95 latency, incidents prevented, false positives.
 - Packaging: Docker image and Helm chart for drop-in deployment.
@@ -247,13 +247,13 @@ jupyter notebook notebooks/rag_benchmark_before_after.ipynb
 Build container:
 
 ```bash
-docker build -t axiom-drift-solo:latest .
+docker build -t axiom-zeta-sentinel-solo:latest .
 ```
 
 Install Helm chart:
 
 ```bash
-helm install axiom-drift-solo ./helm/axiom-drift-solo
+helm install axiom-zeta-sentinel-solo ./helm/axiom-zeta-sentinel-solo
 ```
 
 ## Notes

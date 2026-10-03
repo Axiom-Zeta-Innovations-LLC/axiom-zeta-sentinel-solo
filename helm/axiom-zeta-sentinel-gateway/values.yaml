@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/anthonyrenecastro-create/axiom-drift-solo
+  repository: ghcr.io/anthonyrenecastro-create/axiom-zeta-sentinel-solo
   tag: latest
   pullPolicy: IfNotPresent
 

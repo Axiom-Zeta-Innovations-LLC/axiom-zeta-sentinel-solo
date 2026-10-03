@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: axiom-drift-solo
+  name: axiom-zeta-sentinel-solo
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: axiom-drift-solo
+      app: axiom-zeta-sentinel-solo
   template:
     metadata:
       labels:
-        app: axiom-drift-solo
+        app: axiom-zeta-sentinel-solo
     spec:
       containers:
         - name: gateway

@@ -11,8 +11,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 
-def _install_fake_axiom_drift_core() -> None:
-    module = types.ModuleType("axiom_drift_core")
+def _install_fake_axiom_zeta_sentinel_core() -> None:
+    module = types.ModuleType("axiom_zeta_sentinel_core")
 
     class DriftEngine:
         def __init__(self, nx: int, ny: int, n_fields: int, seed: int, baseline_windows: int = 5) -> None:
@@ -47,7 +47,7 @@ def _install_fake_axiom_drift_core() -> None:
             self.resets += 1
 
     module.DriftEngine = DriftEngine
-    sys.modules["axiom_drift_core"] = module
+    sys.modules["axiom_zeta_sentinel_core"] = module
 
 
 @pytest.fixture
@@ -55,7 +55,7 @@ def app_modules(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.delenv("GATEWAY_API_KEY", raising=False)
     # Unit tests run without a key; production now fails closed unless this is set.
     monkeypatch.setenv("ALLOW_INSECURE_NO_AUTH", "true")
-    _install_fake_axiom_drift_core()
+    _install_fake_axiom_zeta_sentinel_core()
 
     # Reload modules to ensure service singletons use the fake Rust extension.
     for name in [

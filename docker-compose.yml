@@ -1,11 +1,11 @@
 version: "3.9"
 
 services:
-  axiom-drift-solo:
+  axiom-zeta-sentinel-solo:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: axiom-drift-solo
+    container_name: axiom-zeta-sentinel-solo
     env_file:
       - .env
     ports:
