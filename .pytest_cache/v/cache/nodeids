@@ -1,0 +1,13 @@
+[
+  "tests/test_api_integration.py::test_api_key_enforced_when_configured",
+  "tests/test_api_integration.py::test_feedback_and_telemetry_collect_slos",
+  "tests/test_api_integration.py::test_stabilize_requires_text_or_embedding",
+  "tests/test_api_integration.py::test_stabilize_returns_contract_shape",
+  "tests/test_hardening.py::test_baseline_reset_endpoint",
+  "tests/test_hardening.py::test_gateway_fails_closed_without_key",
+  "tests/test_hardening.py::test_tenant_limit_returns_429",
+  "tests/test_hardening.py::test_wrong_key_rejected",
+  "tests/test_real_engine.py::test_real_engine_behaviour",
+  "tests/test_replay_integration.py::test_replay_harness_handles_empty_input",
+  "tests/test_replay_integration.py::test_replay_harness_reports_totals"
+]
